@@ -1,4 +1,4 @@
-const { userService } = require("../services.userService");
+const userService = require("../services/userService");
 
 const createUser = async (req, res) => {
   const { email, nickname, password } = req.body;
@@ -7,8 +7,9 @@ const createUser = async (req, res) => {
     return;
   }
   await userService.createUser(email, nickname, password);
-
   res.status(201).json({ message: "회원가입이 완료되었습니다." });
 };
 
-module.exports = { creatUser };
+const loginUser = async (req, res) => {};
+
+module.exports = { createUser };
