@@ -23,9 +23,17 @@ const updatePostings = async (req, res) => {
 };
 
 const deletePostings = async (req, res) => {
-  const postId = req.query.id;
-  const deletePostings = await postService.deletePostings(postId);
-  res.status(204).json({ message: "Delete Complete..." });
+  try {
+    const postId = req.query.id;
+    if (!postId) {
+      return res.status(400).json({ message: "KEY ERROR..." });
+    }
+    await postService.deletePostings(postId);
+    res.status(201).json({ message: "Delete Complete..." });
+  } catch (err) {
+    console.log(err);
+    return res.status(err.statusCode || 500).json({ message: err.message });
+  }
 };
 
 module.exports = {

@@ -8,7 +8,7 @@ const myDataSource = new DataSource({
   database: process.env.TYPEORM_DATABASE,
 });
 
-myDataSource //데이타 베이스 불러오기
+myDataSource
   .initialize()
   .then(() => {
     console.log("Data Source has been initialized!!!!!!");
@@ -25,4 +25,11 @@ const createUser = async (email, nickname, hashedPw) => {
   return user;
 };
 
-module.exports = { createUser };
+const loginUser = async (email) => {
+  const loginUser = await myDataSource.query(
+    `SELECT users.id, users.email, users.password FROM users WHERE users.email= "${email}"`
+  );
+  return loginUser;
+};
+
+module.exports = { createUser, loginUser };
