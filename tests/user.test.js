@@ -1,7 +1,7 @@
 const request = require("supertest");
 const { createApp } = require("../app");
-
 const { DataSource } = require("typeorm");
+
 const myDataSource = new DataSource({
   type: process.env.TYPEORM_CONNECTION,
   host: process.env.TYPEORM_HOST,
@@ -16,7 +16,7 @@ describe("User sign up test", () => {
 
   beforeAll(async () => {
     //테스트 시작 전 데이터베이스와 연결하는 과정
-    app = createApp;
+    app = createApp();
     await myDataSource.initialize();
   });
 
@@ -25,10 +25,10 @@ describe("User sign up test", () => {
     await myDataSource.destroy();
   });
 
-  Test("SUCCESS: created user", async () => {
+  test("SUCCESS: created user", async () => {
     await request(app)
       .post("/users/signup")
-      .send({ email: asdf, password: asdf })
+      .send({ email: "tset@test.com", nickname: "test", password: "12345" })
       .expect(201);
   });
 });
