@@ -4,7 +4,6 @@ const userController = require("../controllers/userController");
 
 router.post("/signup", userController.createUser); // 회원가입
 
-//로그인 기능 레이어드 패턴 적용 어려움,,
 router.post("/login", async (req, res) => {
   let { email, password } = req.body; ///    controller
   await myDataSource.query(

@@ -8,9 +8,10 @@ const router = require("./routers");
 app.use(express.json());
 app.use(router);
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "pong!!" }); // 핑퐁테스트
-});
+const startServer = () => {
+  const app = createApp();
+  const port = 8000;
+  const server = http.createServer(app);
 
 const server = http.createServer(app);
 
